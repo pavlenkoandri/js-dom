@@ -138,8 +138,14 @@
 
         // Приклад сортування по прайсу 
         // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-        let newPwt = pets.sort((a, b) => a.price > b.price ? 1 : -1);
-        console.log(newPwt); // отримоємо новий масив де йде сортування оп ціні від меньшої
+        let newPet = pets.sort((a, b) => {
+            if (a.price > b.price) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        console.log(newPet); // отримуємо новий масив де йде сортування оп ціні від меньшої
     </script>
 </body>
 
