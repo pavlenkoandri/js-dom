@@ -93,7 +93,7 @@
                 name: "Скоттиш фолд", // Порода
                 description: 'Гарний ,охайний котик. Привчений до лотка,їсть сухий корм. Любить гратися. Котику майже 4 місяці.( В подарунок 2 лоточка для туалету.',
                 location: "Київ, Київська область",
-                price: "1 500 грн",
+                price: "1500 грн",
                 url: 'https://d1opu7v3g3cdvy.cloudfront.net/213x160/o4b5MCkz9QUV6sgVCPzV.webp'
             },
             {
@@ -136,6 +136,10 @@
             `
         })
 
+        // Приклад сортування по прайсу 
+        // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+        let newPwt = pets.sort((a, b) => a.price > b.price ? 1 : -1);
+        console.log(newPwt);
     </script>
 </body>
 
