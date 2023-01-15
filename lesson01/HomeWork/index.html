@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <section>
-        <h4>Запитай ім’я користувача та виведи у відповідь “Привіт, *ім’я*”;</h4>
-        <input type="text" class="name">
-        <button class="btn1">Send</button>
-        <p>
-            Привіт:
-            <span class="out1"></span>
-        </p>
+      <h4>Запитай ім’я користувача та виведи у відповідь “Привіт, *ім’я*”;</h4>
+      <input type="text" class="name" />
+      <button class="btn1">Send</button>
+      <p>
+        Привіт:
+        <span class="out1"></span>
+      </p>
     </section>
 
     <section>
-        <h4>
-            переводить їх в євро. EUR = 38гр <br>
-            Євро к Гривні
-        </h4>
-        <input type="text" class="name2">
-        <button class="btn2">Send</button>
-        <p>
-            по курсу:
-            <span class="out2"></span>
-        </p>
+      <h4>
+        переводить їх в євро. EUR = 38гр <br />
+        Євро к Гривні
+      </h4>
+      <input type="text" class="name2" />
+      <button class="btn2">Send</button>
+      <p>
+        по курсу:
+        <span class="out2"></span>
+      </p>
     </section>
-
 
     <script>
-        // your code 
-
-
+      const name = document.querySelector(".name");
+      const button = document.querySelector(".btn1");
+      button.addEventListener("click", function () {
+        alert(name.value);
+      });
+      const eur = 38;
+      const name2 = document.querySelector(".name2");
+      const button2 = document.querySelector(".btn2");
+      button2.addEventListener("click", () => {
+        alert(name2.value / eur);
+      });
     </script>
-</body>
-
+  </body>
 </html>
