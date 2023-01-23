@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .bag {
-            padding: 10px;
-            border-radius: 10px;
-            background-color: aquamarine;
-            width: fit-content;
-            position: fixed;
-            right: 20px;
-            top: 20px;
-        }
+      .bag {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: aquamarine;
+        width: fit-content;
+        position: fixed;
+        right: 20px;
+        top: 20px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-
-    <button class="minus">-</button> <span>0</span> <button class="plus">+</button>
+  <body>
+    <button class="minus">-</button> <span>0</span>
+    <button class="plus">+</button>
 
     <h3>Users</h3>
     <h5>Сюди: <b class="out2">----</b></h5>
 
-
     <div class="bag">0</div>
     <script>
+      const arr = ["user 0", "user 1", "user 2", "user 3", "user 4"];
 
-        const arr = ["user 0", "user 1", "user 2", "user 3", "user 4"]
+      const bag = [];
+      // 1: не можна виходити в мінус
+      // 2: каунтер не більше кількості єлементів масиву
+      // 3: при натисканні - видаляти юзера
 
-        const bag = []
+      // Екстра
+      // реалізація корзини
 
-        // 1: не можна виходити в мінус
-        // 2: каунтер не більше кількості єлементів масиву
-        // 3: при натисканні - видаляти юзера
+      let minus = document.querySelector(".minus");
+      let plus = document.querySelector(".plus");
+      let out = document.querySelector("span");
+      let out2 = document.querySelector(".out2");
 
-        // Екстра
-        // реалізація корзини
-
-        let minus = document.querySelector('.minus')
-        let plus = document.querySelector('.plus')
-        let out = document.querySelector('span')
-        let out2 = document.querySelector('.out2')
-
-
-
-        let counet = 0;
-
-        plus.onclick = () => {
-            out.innerHTML = ++counet
-        }
-        minus.onclick = () => {
-            out.innerHTML = --counet
+      let counet = 0;
+      let emptyValue = "----";
+      plus.onclick = () => {
+        if (counet < arr.length) {
+          bag.push(arr[counet]);
+          out.innerHTML = ++counet;
         }
 
+        out2.innerText = bag;
+      };
+      minus.onclick = () => {
+        if (counet > 0) {
+          bag.pop(arr[counet]);
+          out.innerHTML = --counet;
+        }
+        out2.innerText = bag;
+        if (counet == 0) {
+          out2.innerText = emptyValue;
+        }
+      };
     </script>
-</body>
-
+  </body>
 </html>

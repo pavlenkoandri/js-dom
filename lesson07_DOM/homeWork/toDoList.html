@@ -1,76 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .red {
-            color: red;
-        }
+      .red {
+        color: red;
+      }
 
-        .error {
-            color: red;
-        }
+      .error {
+        color: red;
+      }
+      .letext {
+        display: flex;
+        flex-direction: row;
+      }
+      .izErore {
+        border: solid 1px red;
+        border-radius: 5px;
+      }
+      .inp {
+        outline: none;
+      }
+      .span {
+        color: red;
+      }
+      .lacalss {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+      }
+      .form {
+        display: flex;
+        align-items: flex-end;
+      }
+      .btn {
+        color: blue;
+
+        margin-left: 15px;
+        height: 25px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <input class="inp" type="text">
-    <button class="btn">add</button>
+  <body>
+    <form class="form">
+      <label for="usvod" class="lacalss"
+        >Писать сюда
+        <input class="inp" type="text" id="usvod" />
+        <span class="span"></span>
+      </label>
+      <button class="btn" type="submit">add</button>
+    </form>
     <!-- <div class="error">Error</div> -->
-    <ol class="out">
-
-    </ol>
+    <ol class="out"></ol>
 
     <div class="couter">0</div>
 
-
-
-
     <script>
-        let ipn = document.querySelector('.inp')
-        let btn = document.querySelector('.btn')
-        let out = document.querySelector('.out')
+      let form = document.querySelector(".form");
+      let ipn = document.querySelector(".inp");
+      let btn = document.querySelector(".btn");
+      let errorMtiValue = document.querySelector(".span");
+      let out = document.querySelector(".out");
+      let cout = 0;
+      let izErore = "izErore";
+      // 1: Не довати однакові інпут текс і пустий + додати вілідвціоний текст
+      // 2: зробити UI
 
-        let cout = 0;
+      function toDoList(event) {
+        event.preventDefault();
+        let liList = out.querySelectorAll(".ptext");
+        let inputValue = ipn.value;
+        let marker = false;
+        liList.forEach((li) => {
+          if (li.innerText == inputValue) {
+            marker = true;
+          }
+        });
 
-        // 1: Не довати однакові інпут текс і пустий + додати вілідвціоний текст
-        // 2: зробити UI 
+        if (!inputValue) {
+          ipn.classList.add(izErore);
+          errorMtiValue.innerText = "Веди мінімум три символи!";
 
-        function toDoList() {
-            let list = document.createElement('li')
-            list.innerText = ipn.value;
-
-            let chek = document.createElement('input');
-            chek.setAttribute('type', 'checkbox')
-            chek.onchange = () => {
-                if (chek.checked) {
-                    list.classList.add('red')
-                    //document.querySelector('.couter').innerHTML = ++cout
-                } else {
-                    list.classList.remove('red')
-                    //document.querySelector('.couter').innerHTML = --cout
-                }
-            }
-
-            let button = document.createElement('button');
-            button.innerText = "X"
-            // При видаленні list робити каунтер -1
-            button.onclick = () => {
-                list.parentNode.removeChild(list);
-            }
-
-            //document.querySelector()
-            list.append(chek)
-            list.append(button)
-            out.append(list)
+          return;
         }
+        if (marker) {
+          ipn.classList.add(izErore);
+          errorMtiValue.innerText = "Веди другую задачу!";
 
-        btn.onclick = toDoList;
+          return;
+        }
+        if (inputValue.length > 10) {
+          ipn.classList.add(izErore);
+          errorMtiValue.innerText = "Максимальная длина 10 символов.";
+
+          return;
+        }
+        if (inputValue.length < 3) {
+          ipn.classList.add(izErore);
+          errorMtiValue.innerText = "Минимальная длина  3 символа.";
+
+          return;
+        }
+        let list = document.createElement("li");
+        list.innerHTML = `<p class="ptext" > ${inputValue} </p>`;
+        list.classList.add("letext");
+
+        let chek = document.createElement("input");
+        chek.setAttribute("type", "checkbox");
+        chek.onchange = () => {
+          if (chek.checked) {
+            list.classList.add("red");
+            //document.querySelector('.couter').innerHTML = ++cout
+          } else {
+            list.classList.remove("red");
+            //document.querySelector('.couter').innerHTML = --cout
+          }
+        };
+
+        let button = document.createElement("button");
+        button.innerText = "X";
+        // При видаленні list робити каунтер -1
+        button.onclick = () => {
+          list.parentNode.removeChild(list);
+        };
+
+        //document.querySelector()
+        list.append(chek);
+        list.append(button);
+        out.append(list);
+      }
+      ipn.addEventListener("focus", () => {
+        ipn.classList.remove(izErore);
+        errorMtiValue.innerText = "";
+      });
+
+      form.addEventListener("submit", toDoList);
     </script>
-</body>
-
+  </body>
 </html>
