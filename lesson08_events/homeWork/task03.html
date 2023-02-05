@@ -1,73 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <style>
-        .box {
-            width: 100px;
-            height: 100px;
-            border-radius: 100px;
-            background-color: aqua;
-            border: 1px solid;
-            position: relative;
-        }
+      .box {
+        width: 100px;
+        height: 100px;
+        border-radius: 100px;
+        background-color: aqua;
+        border: 1px solid;
+        position: relative;
+      }
 
-        .box:nth-child(3) {
-            top: 50%;
-            left: 50%;
-        }
+      .box:nth-child(3) {
+        top: 50%;
+        left: 50%;
+      }
 
-        .box:nth-child(1) {
-            top: 10%;
-            left: 90%;
-        }
+      .box:nth-child(1) {
+        top: 10%;
+        left: 90%;
+      }
 
-        .box:nth-child(2) {
-            top: 30%;
-            left: 20%;
-        }
+      .box:nth-child(2) {
+        top: 30%;
+        left: 20%;
+      }
 
-        .box:nth-child(4) {
-            top: 20%;
-            left: 80%;
-        }
+      .box:nth-child(4) {
+        top: 20%;
+        left: 80%;
+      }
 
-        .box:nth-child(7) {
-            top: 40%;
-            left: 50%;
-        }
+      .box:nth-child(7) {
+        top: 40%;
+        left: 50%;
+      }
 
-        .wrraper {
-            width: 100vw;
-            height: 100vh;
-        }
+      .wrraper {
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="wrraper">
-        <div class="box" data-speed="1"></div>
-        <div class="box" data-speed="0.3"></div>
-        <div class="box" data-speed="2"></div>
-        <div class="box" data-speed="0.8"></div>
-        <div class="box" data-speed="1.2"></div>
-        <div class="box" data-speed="3"></div>
-        <div class="box" data-speed="1.6"></div>
-        <div class="box" data-speed="1.8"></div>
-        <div class="box" data-speed="0.4"></div>
-        <div class="box" data-speed="0.2"></div>
+      <div class="box" data-speed="1"></div>
+      <div class="box" data-speed="0.3"></div>
+      <div class="box" data-speed="2"></div>
+      <div class="box" data-speed="0.8"></div>
+      <div class="box" data-speed="1.2"></div>
+      <div class="box" data-speed="3"></div>
+      <div class="box" data-speed="1.6"></div>
+      <div class="box" data-speed="1.8"></div>
+      <div class="box" data-speed="0.4"></div>
+      <div class="box" data-speed="0.2"></div>
     </div>
 
     <script>
-        // 1 ревлізувати паралакс
-        // 2 відаляти подію на телефонах
+      let wrap = document.querySelector(".wrraper");
+      let box = document.querySelectorAll(".box");
 
+      // 1 ревлізувати паралакс
+      // 2 відаляти подію на телефонах
+      const paralax = function (event) {
+        box.forEach((item) => {
+          let speed = item.getAttribute("data-speed");
+
+          item.style.transform = `translate(${(event.clientX / 4) * speed}px, ${
+            (event.clientY / 4) * speed
+          }px)`;
+        });
+      };
+      wrap.addEventListener("mousemove", paralax);
+
+      window.addEventListener("resize", () => {
+        console.log("adawdw", window.outerWidth);
+        if (window.outerWidth < 768) {
+          wrap.removeEventListener("mousemove", paralax);
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

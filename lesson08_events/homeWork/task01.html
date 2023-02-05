@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .box {
-            width: 50px;
-            height: 50px;
-            background-color: aqua;
-        }
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: aqua;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="box"></div>
     <script>
+      let box = document.querySelector(".box");
+      let width = window.innerWidth;
+      let boxWidth = box.offsetWidth;
 
-        let box = document.querySelector('.box')
+      // 1: По натисканню кнопки alt ми зменьшуемо єлемент але не меньше його розміру
+      // 2: Екстра, робити не більше довжини єкрану
+      box.addEventListener("click", function (event) {
+        console.log(event.altKey, boxWidth, width);
+        if (width > boxWidth + 10) {
+          box.style.width = `${(boxWidth = boxWidth + 10)}px`;
+        } else {
+          boxWidth = width;
+          box.style.width = `${width}px`;
+        }
+      });
 
-        let boxWidth = box.offsetWidth;
-
-        // 1: По натисканню кнопки alt ми зменьшуемо єлемент але не меньше його розміру
-        // 2: Екстра, робити не більше довжини єкрану
-        box.addEventListener('click', function (event) {
-            console.log(event.altKey);
-            box.style.width = `${boxWidth = boxWidth + 10}px`
-        })
+      document.addEventListener("keyup", function (event) {
+        if (boxWidth > 50) {
+          box.style.width = `${(boxWidth = boxWidth - 10)}px`;
+        }
+        event.stopPropagation();
+      });
     </script>
-</body>
-
+  </body>
 </html>

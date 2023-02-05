@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <style>
-        .box {
-            width: 100px;
-            height: 100px;
-            background-color: aqua;
-            border-radius: 100px;
-        }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        border-radius: 100px;
+      }
 
-        .wrapper {
-            width: 100vw;
-            height: 100vh;
-        }
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="wrapper">
-        <div class="box"></div>
+      <div class="box" id="circle"></div>
     </div>
 
     <script>
+      let wrap = document.querySelector(".wrapper");
+      let box = document.querySelector(".box");
 
-        let wrap = document.querySelector('.wrapper');
-        let box = document.querySelector('.box');
+      // 2: зробити умову якою покласти мячик
+      // box.removeEventListener('click', moveBox)
 
+      function dragstart_handler(ev) {
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+      }
 
-        // 2: зробити умову якою покласти мячик
-        // box.removeEventListener('click', moveBox)
-
+      window.addEventListener("DOMContentLoaded", () => {
+        // Get the element by id
+        const element = document.getElementById("circle");
+        // Add the ondragstart event listener
+        element.addEventListener("dragstart", dragstart_handler);
+      });
     </script>
-</body>
-
+  </body>
 </html>

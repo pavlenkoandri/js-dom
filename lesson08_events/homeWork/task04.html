@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
     <style>
-        .box {
-            width: 100px;
-            height: 100px;
-            background-color: aqua;
-            border: 1px solid;
-            position: relative;
-        }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: aqua;
+        border: 1px solid;
+        position: relative;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="out"></div>
 
     <div class="box"></div>
 
     <script>
-        let box = document.querySelector('.box')
+      let box = document.querySelector(".box");
 
-        let right = 0;
-        // Зробити шоб не можна було вийти за рамки window
-        // 2: Щоб shift + ArrowRight збільшував швидкість в два рази 
-
-        document.addEventListener('keydown', function (event) {
-            console.log(event);
-            if (event.key == 'ArrowRight') {
-                box.style.left = `${right = right + 10}px`
-            } else if (event.key == 'ArrowLeft') {
-                box.style.left = `${right = right - 10}px`
-            }
-
-        })
+      let rightPosition = 0;
+      // Зробити шоб не можна було вийти за рамки window
+      // 2: Щоб shift + ArrowRight збільшував швидкість в два рази
+      const widthWindou = window.outerWidth;
+      console.log(box.getBoundingClientRect());
+      document.addEventListener("keydown", function ({ key }) {
+        const { left, right, width } = box.getBoundingClientRect();
+        if (key == "ArrowRight" && !(widthWindou < right + 10)) {
+          rightPosition = rightPosition + 10;
+          box.style.left = `${rightPosition}px`;
+          console.log(widthWindou);
+        }
+        if (key == "ArrowRight" && !(widthWindou > right + 10)) {
+          rightPosition = widthWindou - width;
+          box.style.left = `${rightPosition}px`;
+        }
+        console.log(box.getBoundingClientRect());
+        if (key == "ArrowLeft" && 0 < left) {
+          rightPosition = rightPosition - 10;
+          box.style.left = `${rightPosition}px`;
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
